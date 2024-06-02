@@ -1,0 +1,12 @@
+black
+datasets==2.19.1
+torchserve
+torch-model-archiver
+torch-workflow-archiver
+trl
+scikit-learn==1.5.0
+torch~=2.3.0
+# transformers~=4.41.1
+transformers @ git+https://github.com/Kostis-S-Z/transformers.git
+pandas~=2.2.2
+seqeval
