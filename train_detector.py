@@ -18,7 +18,7 @@ print(
 dataset_name = "ai4privacy/pii-masking-65k"  # 21_587 total size
 inference_dataset_name = dataset_name
 model_name = "facebook/opt-350m"  # "distilbert/distilbert-base-uncased"
-model_dir = "../finetune_new/pii_detector"
+model_dir = "pii_detector"
 
 train_dataset_size = 17_000
 eval_dataset_size = 4_587
@@ -55,8 +55,7 @@ training_args = TrainingArguments(
     per_device_train_batch_size=batch_size,
     warmup_steps=500,
     weight_decay=0.01,
-    save_strategy="no",
-    logging_dir=model_dir + "_logs",
+    logging_dir=model_dir + "/logs",
     logging_steps=10,
 )
 
