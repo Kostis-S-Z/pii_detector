@@ -13,13 +13,13 @@ class PIIDataset(TorchDataset):
     """Use a TorchDataset wrapper to properly handle retrieving samples from this specific dataset"""
 
     def __init__(
-        self,
-        hf_dataset_id: str,
-        tokenizer: PreTrainedTokenizer,
-        max_len: int,
-        samples_to_use: int = None,
-        slice_start: int = 0,
-        slice_end: int = -1,
+            self,
+            hf_dataset_id: str,
+            tokenizer: PreTrainedTokenizer,
+            max_len: int,
+            samples_to_use: int = None,
+            slice_start: int = 0,
+            slice_end: int = -1,
     ):
         self.dataset = load_dataset(hf_dataset_id, split=f"train")
         self.tokenizer = tokenizer
