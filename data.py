@@ -21,14 +21,7 @@ class PIIDataset(TorchDataset):
         slice_start: int = 0,
         slice_end: int = -1,
     ):
-        if samples_to_use:
-            self.dataset = load_dataset(
-                hf_dataset_id, split=f"train[:{samples_to_use}]"
-            )
-        else:
-            self.dataset = load_dataset(
-                hf_dataset_id, split=f"train[{slice_start}:{slice_end}]"
-            )
+        self.dataset = load_dataset(hf_dataset_id, split=f"train")
         self.tokenizer = tokenizer
         self.max_len = max_len
 
@@ -39,6 +32,11 @@ class PIIDataset(TorchDataset):
         self.label_to_index = {label: i for i, label in enumerate(unique_labels)}
         self.index_to_label = {i: label for i, label in enumerate(unique_labels)}
         self.num_labels = len(self.label_to_index)
+
+        if samples_to_use:
+            self.dataset = self.dataset.select(range(samples_to_use))
+        else:
+            self.dataset = self.dataset.select(range(slice_start, slice_end))
 
     def __getitem__(self, index: int) -> Dict[str, torch.Tensor]:
         tokens = self.dataset["tokenised_unmasked_text"][index]
