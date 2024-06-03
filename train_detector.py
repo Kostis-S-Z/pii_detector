@@ -90,6 +90,8 @@ with open(model_dir + "/config.json") as f:
     updated_config["max_len"] = max_len
 with open(model_dir + "/config.json", "w") as f:
     json.dump(updated_config, f, sort_keys=True, indent=4)
+with open(model_dir + "/train_metrics.json", "w") as fp:
+    json.dump(train_results, fp, sort_keys=True, indent=4)
 with open(model_dir + "/eval_metrics.json", "w") as fp:
     json.dump(eval_results, fp, sort_keys=True, indent=4)
 with open(model_dir + "/label_to_index.json", "w") as fp:
