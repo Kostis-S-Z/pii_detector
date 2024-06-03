@@ -13,13 +13,13 @@ class PIIDataset(TorchDataset):
     """Use a TorchDataset wrapper to properly handle retrieving samples from this specific dataset"""
 
     def __init__(
-            self,
-            hf_dataset_id: str,
-            tokenizer: PreTrainedTokenizer,
-            max_len: int,
-            samples_to_use: int = None,
-            slice_start: int = 0,
-            slice_end: int = -1,
+        self,
+        hf_dataset_id: str,
+        tokenizer: PreTrainedTokenizer,
+        max_len: int,
+        samples_to_use: int = None,
+        slice_start: int = 0,
+        slice_end: int = -1,
     ):
         self.dataset = load_dataset(hf_dataset_id, split=f"train")
         self.tokenizer = tokenizer
@@ -68,13 +68,24 @@ class PIIDataset(TorchDataset):
         return len(self.dataset)
 
 
-def compute_metric_custom(index_to_label: Dict[int, str]):
+def compute_metric_custom(
+    index_to_label: Dict[int, str], neutral_label_index: int
+) -> float:
     def compute_metric(p):
         predictions, labels = p
         predictions = np.argmax(predictions, axis=2)
 
-        true_predictions = [[index_to_label[label]] for label in labels.flatten()]
-        true_labels = [[index_to_label[label]] for label in predictions.flatten()]
+        labels = [
+            neutral_label_index if label == -100 else label
+            for label in labels.flatten()
+        ]
+        predictions = [
+            neutral_label_index if label == -100 else label
+            for label in predictions.flatten()
+        ]
+
+        true_labels = [[index_to_label[label]] for label in labels]
+        true_predictions = [[index_to_label[label]] for label in predictions]
 
         precision = precision_score(true_labels, true_predictions, scheme=IOB2)
         recall = recall_score(true_labels, true_predictions, scheme=IOB2)

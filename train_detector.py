@@ -59,7 +59,9 @@ training_args = TrainingArguments(
     logging_steps=10,
 )
 
-compute_metrics = compute_metric_custom(index_to_label)
+compute_metrics = compute_metric_custom(
+    index_to_label, neutral_label_index=label_to_index["O"]
+)
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -86,6 +88,7 @@ with open(model_dir + "/config.json") as f:
     updated_config["model_name"] = model_name
     updated_config["dataset_name"] = inference_dataset_name
     updated_config["max_len"] = max_len
+with open(model_dir + "/config.json", "w") as f:
     json.dump(updated_config, f, sort_keys=True, indent=4)
 with open(model_dir + "/eval_metrics.json", "w") as fp:
     json.dump(eval_results, fp, sort_keys=True, indent=4)
