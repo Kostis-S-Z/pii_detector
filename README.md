@@ -4,7 +4,7 @@
 [![MIT License][license-shield]][license-url] 
 -->
 
-# Blueprint of a PII Detector
+# Blueprint of a PII Detector 
 
 Personally Identifiable Information (PII) refers to any data that could potentially identify a specific individual. This includes details like name, address, phone number, email address, Social Security number, IP addresses, etc.
 
@@ -21,7 +21,7 @@ This repo serves as a starting point for an (almost) complete solution - a conta
   * [Find optimal batch size for local GPU](#find-optimal-batch-size-for-local-gpu)
 * [Execute](#execute)
   * [Fine-tune the LLM](#fine-tune-the-llm)
-  * [Serve the PII Detector](#fine-tune-the-llm)
+  * [Serve the PII Detector](#serve-the-pii-detector)
   * [Modify Parameters](#modify-parameters)
 * [License](#license)
 
@@ -29,7 +29,7 @@ This repo serves as a starting point for an (almost) complete solution - a conta
 ## Project overview
 
 This repo follows an MVP (Minimal Viable Product) approach, meaning that it consists of minimal components for an idea / experiment that can be easily shared with other users / developers, which could then be adapted / extended to certain use cases.
-Step 1 is to fine-tune a pre-trained LLM with a PII data. Step 2 is to deploy the fine-tuned model to a server for users to query.
+Step 1 is to fine-tune a pre-trained LLM with a PII data. Step 2 is to deploy the model to a server for users to query.
 Step 1 and 2 need to be executed sequentially but can be executed independentaly and either locally or on a remote server. For example you could first fine-tune the LLM on a local machine and then deploy the model on a server in GCP or AWS.
 
 
@@ -43,7 +43,7 @@ Built with
 
 ### Data
 
-For the purpose of making this demo easily accessible, one of the most established, open-source PII datasets was used from the company [AI4Privacy](https://ai4privacy.com/). However, one could relatively easy use their own data by modifying the class [PIIDataset](https://github.com/Kostis-S-Z/pii_detector/blob/63f847f0885a11bbaadf1f476e22b7e17d196837/data.py#L12C7-L12C17). The dataset [pii-masking](https://huggingface.co/datasets/ai4privacy/pii-masking-65k) includes 103 classes of different PII use cases such as names, IP addresses, emails etc. More technical information about the dataset:
+For the purpose of making this demo easily accessible, one of the most established, open-source PII datasets was used from the company [AI4Privacy](https://ai4privacy.com/). However, one could relatively easily use their own data by modifying the class [PIIDataset](https://github.com/Kostis-S-Z/pii_detector/blob/63f847f0885a11bbaadf1f476e22b7e17d196837/data.py#L12C7-L12C17). The dataset [pii-masking](https://huggingface.co/datasets/ai4privacy/pii-masking-65k) includes 103 classes of different PII use cases such as names, IP addresses, emails etc. More technical information about the dataset:
 - 5.6m tokens with 65k PII examples.
 - Multiple languages
 - Human-in-the-loop validated high quality dataset
@@ -72,7 +72,7 @@ git clone https://github.com/Kostis-S-Z/pii_detector.git
 cd pii_detector
 ```
 
-2.  Create a virtual envinroment and install the dependencies
+2.  Create a virtual environment and install the dependencies
 
 ```
 python3 -m venv ./venv  # Or use any other virtual environment manager such as poetry
