@@ -10,6 +10,7 @@ Personally Identifiable Information (PII) refers to any data that could potentia
 
 This repo serves as a starting point for an (almost) complete solution - a containerized API endpoint for a classifier that can detect whether certain text can be classified as PII or not. The code includes downloading and fine-tuning locally an open source pre-trained LLM (Large Language Model) with an open source dataset on PII, then saving the model weights and deploying it by building a TorchServe server in a Docker container that can be accessed from the command line to get a classification on user input text.
 
+<p align="center"><img src="./Fine-tune%20LLM.png" width="600" alt="blueprints_logo"/></p>
 
 # Table of Contents
 
